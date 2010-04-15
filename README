@@ -1,0 +1,25 @@
+This is a beta release of a background process for collecting data from 
+WMR968 based weather stations. This software will only work on POSIX 
+based systems (*nix) 
+
+The application consists of three scripts:
+wmr968d.pl - daemon process, reads from serial port and writes to database
+wmrsum.pl  - cron script for consolidating raw data to hour/day/month/year
+wmr        - init.d or rc.d sh script
+
+The Perl scripts require the following modules
+Device::SerialPort
+Config::Fast
+DBI
+Getopt::Mixed
+
+Install:
+mysql < wmr.mysqldump
+./install
+
+Start:
+wmr968d.pl start
+
+Crontab:
+5 * * * *       /usr/bin/wmrsum.pl
+

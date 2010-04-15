@@ -1,0 +1,6 @@
+#!/bin/sh
+cp -p wmr968d.pl /usr/bin/
+cp -p wmr968d.conf /etc/
+cp -p wmrsum.pl /usr/bin/
+
+

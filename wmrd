@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+# chkconfig: 2345 60 60
+# description: WMR Weather Station Logger
+#
+# processname: /usr/sbin/snmpd
+# config: /etc/wmr968d.conf
+# pidfile: /var/run/wmr968d.pid
+
+# source function library
+. /etc/init.d/functions
+
+OPTIONS="-l"
+RETVAL=0
+prog="wmrd"
+
+start() {
+        echo -n $"Starting $prog: "
+        if [ $UID -ne 0 ]; then
+                RETVAL=1
+                failure
+        else
+                /usr/bin/wmr968d.pl $OPTIONS start
+        fi
+        echo 
+        return $RETVAL
+}
+
+stop() {
+        echo -n $"Stopping $prog: "
+        if [ $UID -ne 0 ]; then
+                RETVAL=1
+                failure
+        else
+                /usr/bin/wmr968d.pl $OPTIONS stop
+        fi
+        echo
+        return $RETVAL
+}
+
+reload(){
+        echo -n $"Reloading $prog: "
+        killproc /usr/bin/wmr968d.pl -HUP
+        RETVAL=$?
+        echo
+        return $RETVAL
+}
+
+restart(){
+	stop
+	start
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	restart
+        ;;
+  reload)
+	reload
+        ;;
+  status)
+        /usr/bin/wmr968d.pl status
+	RETVAL=$?
+        ;;
+  *)
+	echo $"Usage: $0 {start|stop|status|restart|reload}"
+	RETVAL=1
+esac
+
+exit $RETVAL

@@ -1,0 +1,11 @@
+port    /dev/ttyS0
+db_type mysql
+db_host mars
+db_name wmr_dev
+db_user wmr
+db_pass dev
+
+sampleInterval 900
+stationId      1
+
+

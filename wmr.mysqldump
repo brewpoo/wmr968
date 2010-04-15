@@ -1,0 +1,136 @@
+-- MySQL dump 10.9
+--
+-- Host: localhost    Database: wmr
+-- ------------------------------------------------------
+-- Server version	4.1.13
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `data`
+--
+
+DROP TABLE IF EXISTS `data`;
+CREATE TABLE `data` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `station_id` tinyint(3) unsigned NOT NULL default '0',
+  `timestamp` datetime NOT NULL default '0000-00-00 00:00:00',
+  `timerange` tinyint(3) unsigned default NULL,
+  `channel1_id` int(10) unsigned default NULL,
+  `channel2_id` int(10) unsigned default NULL,
+  `channel3_id` int(10) unsigned default NULL,
+  `indoor_temp_high` decimal(3,1) default NULL,
+  `outdoor_temp_high` decimal(3,1) default NULL,
+  `channel1_temp_high` decimal(3,1) default NULL,
+  `channel2_temp_high` decimal(3,1) default NULL,
+  `channel3_temp_high` decimal(3,1) default NULL,
+  `indoor_temp_low` decimal(3,1) default NULL,
+  `outdoor_temp_low` decimal(3,1) default NULL,
+  `channel1_temp_low` decimal(3,1) default NULL,
+  `channel2_temp_low` decimal(3,1) default NULL,
+  `channel3_temp_low` decimal(3,1) default NULL,
+  `indoor_temp_avg` decimal(3,1) default NULL,
+  `outdoor_temp_avg` decimal(3,1) default NULL,
+  `channel1_temp_avg` decimal(3,1) default NULL,
+  `channel2_temp_avg` decimal(3,1) default NULL,
+  `channel3_temp_avg` decimal(3,1) default NULL,
+  `indoor_relh_high` decimal(3,1) default NULL,
+  `outdoor_relh_high` decimal(3,1) default NULL,
+  `channel1_relh_high` decimal(3,1) default NULL,
+  `channel2_relh_high` decimal(3,1) default NULL,
+  `channel3_relh_high` decimal(3,1) default NULL,
+  `indoor_relh_low` decimal(3,1) default NULL,
+  `outdoor_relh_low` decimal(3,1) default NULL,
+  `channel1_relh_low` decimal(3,1) default NULL,
+  `channel2_relh_low` decimal(3,1) default NULL,
+  `channel3_relh_low` decimal(3,1) default NULL,
+  `indoor_relh_avg` decimal(3,1) default NULL,
+  `outdoor_relh_avg` decimal(3,1) default NULL,
+  `channel1_relh_avg` decimal(3,1) default NULL,
+  `channel2_relh_avg` decimal(3,1) default NULL,
+  `channel3_relh_avg` decimal(3,1) default NULL,
+  `indoor_dewp_high` decimal(3,1) default NULL,
+  `outdoor_dewp_high` decimal(3,1) default NULL,
+  `channel1_dewp_high` decimal(3,1) default NULL,
+  `channel2_dewp_high` decimal(3,1) default NULL,
+  `channel3_dewp_high` decimal(3,1) default NULL,
+  `indoor_dewp_low` decimal(3,1) default NULL,
+  `outdoor_dewp_low` decimal(3,1) default NULL,
+  `channel1_dewp_low` decimal(3,1) default NULL,
+  `channel2_dewp_low` decimal(3,1) default NULL,
+  `channel3_dewp_low` decimal(3,1) default NULL,
+  `indoor_dewp_avg` decimal(3,1) default NULL,
+  `outdoor_dewp_avg` decimal(3,1) default NULL,
+  `channel1_dewp_avg` decimal(3,1) default NULL,
+  `channel2_dewp_avg` decimal(3,1) default NULL,
+  `channel3_dewp_avg` decimal(3,1) default NULL,
+  `baro_high` int(11) default NULL,
+  `baro_low` int(11) default NULL,
+  `baro_avg` int(11) default NULL,
+  `trend` tinyint(4) default NULL,
+  `forecast` char(1) default NULL,
+  `gust_speed` decimal(3,1) default NULL,
+  `gust_dir` smallint(5) unsigned default NULL,
+  `wind_speed` decimal(3,1) default NULL,
+  `wind_dir` smallint(5) unsigned default NULL,
+  `wind_chill` smallint(6) default NULL,
+  `rain` smallint(5) unsigned default NULL,
+  `rain_ytd` smallint(5) unsigned default NULL,
+  `rain_rate` smallint(5) unsigned default NULL,
+  `rain_rate_high` smallint(5) unsigned default NULL,
+  `cooling_degrees` int(10) unsigned default NULL,
+  `heating_degrees` int(10) unsigned default NULL,
+  PRIMARY KEY  (`id`),
+  KEY `id` (`id`),
+  KEY `station_id` (`station_id`),
+  KEY `timerange` (`timerange`),
+  KEY `timestamp` (`timestamp`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `extra_units`
+--
+
+DROP TABLE IF EXISTS `extra_units`;
+CREATE TABLE `extra_units` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `station_id` tinyint(3) unsigned NOT NULL default '0',
+  `channel` tinyint(3) unsigned default NULL,
+  `name` varchar(50) NOT NULL default '',
+  `description` text,
+  `timestamp` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`),
+  KEY `id` (`id`),
+  KEY `station_id` (`station_id`),
+  KEY `channel` (`channel`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Table structure for table `stations`
+--
+
+DROP TABLE IF EXISTS `stations`;
+CREATE TABLE `stations` (
+  `id` tinyint(3) unsigned NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL default '',
+  `units` tinyint(1) default '0',
+  `outside` varchar(30) default 'outside',
+  PRIMARY KEY  (`id`),
+  KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

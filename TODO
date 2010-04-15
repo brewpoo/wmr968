@@ -1,0 +1,28 @@
+x Fix config file parsing
+x Add comand line processing
+x Add usage
+x Create and manage pid file 
+x Use wmr968d to control the child
+x Add consolidated data table hi/lo/avg
+
+x Process raw data using a second script
+xBuild front end
+
+x Update the sigint receiver to update variables
+x Handle rain_ytd date rollover and base station reset
+
+check and add necessary indexes to database
+
+compute wind chill and heat index (apparent temperature)
+possible add wind_chill_low and heat_index and heat_index_high
+
+wind chill valid between -45 and +45 dF and between 3 and 60mph (33 feet)
+WC[SI]=13.12+0.6215xT-11.37*V**0.16+0.3965XT*V**0.16
+  for V > 4.8 km/h
+
+heat index valid above 57 dF (humidex) (DP>0 and T>20)
+e(vapor pressure in mbar) = 6.11 X exp[5.417.7530 * ((1/273.16)-(1/(dewpoint+273.1)))]
+h=(0.5555)*(e-10.0)
+HI=T+h
+
+
